@@ -48,8 +48,7 @@
 #define MAX_PARAM_ID_BYTES                  64
 #define FLOAT_CMP_PREC                      1e-6f               /* Float comparison precision                       */
 
-
-#ifdef PLATFORM_WINDOWS
+#if defined(__WINDOWS__) || defined(__WIN32__) || defined(__WIN64__) || defined(_WIN64) || defined(_WIN32) || defined(__WINNT) || defined(__WINNT__)
 
 // Prefix for built-in resource
 #define LSP_BUILTIN_PREFIX                  "builtin:\\"
