@@ -49,9 +49,8 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <libloaderapi.h>
-
-#include <lsp-plug.in/runtime/LSPString.h>
-#include <lsp-plug.in/io/Path.h>
+#include <shlwapi.h>
+#include <strsafe.h>
 
 namespace lsp
 {
@@ -69,8 +68,9 @@ namespace lsp
             // Static local variable to get address of current DLL library
             static int lpMod = 0;
             WCHAR modulePath[MAX_PATH];
-            WCHAR* coreDllDirPath = NULL;
-            WCHAR* coreDllFileName = NULL;
+            WCHAR coreDllFileName[MAX_PATH]; 
+            ZeroMemory(modulePath, sizeof(modulePath));
+            ZeroMemory(coreDllFileName, sizeof(coreDllFileName));
 
             // Get current DLL library file path
             BOOL status = GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
@@ -83,22 +83,13 @@ namespace lsp
             GetModuleFileNameW(currentDllModuleHandle, modulePath, MAX_PATH);
 
             // Core library directory part
-            LSPString strDir;
-            strDir.append_utf16(modulePath);
-            io::Path dirPath;
-            dirPath.set(&strDir);
-            dirPath.parent();
-            coreDllDirPath = dirPath.as_string()->clone_utf16();
+            PathRemoveFileSpecW(modulePath);
 
             // Core library filename part
-            char* ptr = NULL;
-            asprintf(&ptr, "%s-%d.%d.%d.dll", "lsp-plugins-vst2", required->major, required->minor, required->micro);
-            LSPString strFile;
-            strFile.append_utf8(ptr);
-            coreDllFileName = strFile.clone_utf16();
+            StringCchPrintfW(coreDllFileName, MAX_PATH, L"%s-%d.%d.%d.dll", L"lsp-plugins-vst2", required->major, required->minor, required->micro);
             
             // Load core library
-            SetDllDirectoryW(coreDllDirPath);
+            SetDllDirectoryW(modulePath);
             coreDllInstance = LoadLibraryW(coreDllFileName); 
             SetDllDirectoryW(NULL);
 
