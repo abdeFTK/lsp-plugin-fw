@@ -193,10 +193,20 @@ ifeq ($(PLATFORM),BSD)
 endif
 
 ifeq ($(PLATFORM),Windows)
+  DEPENDENCIES_VST2_WRAP += \
+    LIBSHLWAPI \
+    LIBWINMM \
+    LIBMSACM \
+    LSP_LLTL_LIB \
+    LSP_RUNTIME_LIB
+
   DEPENDENCIES_VST2 += \
     LIBSHLWAPI \
     LIBWINMM \
-    LIBMSACM
+    LIBMSACM \
+    LIBCAIRO \
+    LIBFREETYPE \
+    LIBGDI32
 endif
 
 #------------------------------------------------------------------------------
@@ -249,7 +259,10 @@ ifeq ($(PLATFORM),Windows)
   DEPENDENCIES_COMMON += \
     LIBSHLWAPI \
     LIBWINMM \
-    LIBMSACM
+    LIBMSACM \
+    LIBCAIRO \
+    LIBFREETYPE \
+    LIBGDI32
 endif
 
 #------------------------------------------------------------------------------
@@ -269,4 +282,6 @@ ALL_DEPENDENCIES = \
   LIBFREETYPE \
   LIBSHLWAPI \
   LIBWINMM \
-  LIBMSACM
+  LIBMSACM \
+  LIBGDI32
+

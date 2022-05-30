@@ -153,3 +153,8 @@ LIBMSACM_NAME              := libmsacm
 LIBMSACM_TYPE              := opt
 LIBMSACM_LDFLAGS           := -lmsacm32
 
+LIBGDI32_VERSION           := system
+LIBGDI32_NAME              := libgdi32
+LIBGDI32_TYPE              := opt
+LIBGDI32_LDFLAGS           := -lgdi32
+

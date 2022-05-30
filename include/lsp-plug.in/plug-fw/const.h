@@ -48,7 +48,17 @@
 #define MAX_PARAM_ID_BYTES                  64
 #define FLOAT_CMP_PREC                      1e-6f               /* Float comparison precision                       */
 
+
+#ifdef PLATFORM_WINDOWS
+
+// Prefix for built-in resource
+#define LSP_BUILTIN_PREFIX                  "builtin:\\"
+
+#else
+
 // Prefix for built-in resource
 #define LSP_BUILTIN_PREFIX                  "builtin://"
+
+#endif
 
 #endif /* LSP_PLUG_IN_PLUG_FW_CONST_H_ */
