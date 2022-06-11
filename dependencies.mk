@@ -82,9 +82,22 @@ endif
 
 ifeq ($(PLATFORM),Windows)
   DEPENDENCIES_JACK += \
+    LIBJACK \
     LIBSHLWAPI \
     LIBWINMM \
-    LIBMSACM
+    LIBMSACM \
+    LIBCAIRO \
+    LIBFREETYPE \
+    LIBGDI32
+
+  DEPENDENCIES_JACK_UI += \
+    LIBJACK \
+    LIBSHLWAPI \
+    LIBWINMM \
+    LIBMSACM \
+    LIBCAIRO \
+    LIBFREETYPE \
+    LIBGDI32
 endif
 
 #------------------------------------------------------------------------------
@@ -202,7 +215,8 @@ ifeq ($(PLATFORM),Windows)
     LIBMSACM \
     LIBCAIRO \
     LIBFREETYPE \
-    LIBGDI32
+    LIBGDI32 \
+    LIBOLE32
 endif
 
 #------------------------------------------------------------------------------
@@ -253,12 +267,14 @@ endif
 
 ifeq ($(PLATFORM),Windows)
   DEPENDENCIES_COMMON += \
+    LIBJACK \
     LIBSHLWAPI \
     LIBWINMM \
     LIBMSACM \
     LIBCAIRO \
     LIBFREETYPE \
-    LIBGDI32
+    LIBGDI32 \
+    LIBOLE32
 endif
 
 #------------------------------------------------------------------------------
@@ -279,5 +295,7 @@ ALL_DEPENDENCIES = \
   LIBSHLWAPI \
   LIBWINMM \
   LIBMSACM \
-  LIBGDI32
+  LIBGDI32 \
+  LIBOLE32
 
+  

@@ -158,3 +158,7 @@ LIBGDI32_NAME              := libgdi32
 LIBGDI32_TYPE              := opt
 LIBGDI32_LDFLAGS           := -lgdi32
 
+LIBOLE32_VERSION           := system
+LIBOLE32_NAME              := libole32
+LIBOLE32_TYPE              := opt
+LIBOLE32_LDFLAGS           := -lole32

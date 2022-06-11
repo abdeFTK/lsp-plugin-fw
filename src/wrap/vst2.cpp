@@ -674,12 +674,16 @@ namespace lsp
                 case effEditKeyDown:
                 case effEditKeyUp:
                 {
+                    #ifdef USE_LIBX11
                     UIWrapper *uiw = w->ui_wrapper();
                     if (uiw == NULL)
                         break;
 
                     // Generate key event handler and pass it to the plugin
                     v = process_key_event(uiw, opcode, index, value);
+                    #else
+                    v = 0;
+                    #endif /* USE_LIBX11 */
                     break;
                 }
             #endif /* LSP_NO_VST_UI */
